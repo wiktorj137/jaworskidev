@@ -28,26 +28,20 @@ export function Hero() {
               </div>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+            <h1
               className="mb-6 font-mono text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
             >
               JaworskiDev
               <span className="block text-muted-foreground">Digital Solutions</span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            <p
               className="mb-8 max-w-lg text-lg leading-relaxed text-muted-foreground"
             >
               Przekształcamy pomysły w produkty cyfrowe, które napędzają biznes.
               <br />
               Aplikacje webowe, które zachwycają użytkowników i generują wyniki.
-            </motion.p>
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -90,7 +84,7 @@ export function Hero() {
               <div className="h-px bg-border/50" />
 
               <div>
-                <div className="mb-1 font-mono text-3xl font-bold">&lt;1s</div>
+                <div className="mb-1 font-mono text-3xl font-bold">~1.1s</div>
                 <div className="text-sm text-muted-foreground">Średni First Contentful Paint</div>
               </div>
 
