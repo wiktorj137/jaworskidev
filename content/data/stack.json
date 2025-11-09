@@ -1,0 +1,27 @@
+[
+  {
+    "category": "Frontend",
+    "items": [
+      { "label": "Next.js", "url": "https://nextjs.org" },
+      { "label": "React", "url": "https://react.dev" },
+      { "label": "TailwindCSS", "url": "https://tailwindcss.com" },
+      { "label": "shadcn/ui", "url": "https://ui.shadcn.com" }
+    ]
+  },
+  {
+    "category": "Backend / Infra",
+    "items": [
+      { "label": "Vercel", "url": "https://vercel.com" },
+      { "label": "Server Actions", "url": "https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions" },
+      { "label": "Resend", "url": "https://resend.com" }
+    ]
+  },
+  {
+    "category": "Dev Experience",
+    "items": [
+      { "label": "TypeScript", "url": "https://www.typescriptlang.org" },
+      { "label": "ESLint", "url": "https://eslint.org" },
+      { "label": "Vitest", "url": "https://vitest.dev" }
+    ]
+  }
+]

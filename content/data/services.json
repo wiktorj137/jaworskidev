@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Landing Page",
+    "shortDesc": "Szybka, nowoczesna strona lądowania pod kampanię lub produkt.",
+    "longDesc": "Projekt UX/UI, responsywny layout, optymalizacja wydajności, wdrożenie na Vercel.",
+    "ctaLabel": "Zamów wycenę"
+  },
+  {
+    "name": "Aplikacja Web",
+    "shortDesc": "Dedykowana aplikacja w Next.js z backendem serverless.",
+    "longDesc": "Architektura modułowa, autoryzacja, integracje z API, testy i CI/CD.",
+    "ctaLabel": "Porozmawiajmy"
+  },
+  {
+    "name": "Audyt + Optymalizacja",
+    "shortDesc": "Analiza Lighthouse, Core Web Vitals i rekomendacje techniczne.",
+    "longDesc": "Przegląd kodu, poprawki wydajności, SEO techniczne, accessibility.",
+    "ctaLabel": "Popraw wydajność"
+  }
+]
