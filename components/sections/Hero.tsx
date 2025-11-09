@@ -34,8 +34,8 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mb-6 font-mono text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
             >
-              Wiktor Jaworski
-              <span className="block text-muted-foreground">Full-stack dev</span>
+              JaworskiDev
+              <span className="block text-muted-foreground">Digital Solutions</span>
             </motion.h1>
 
             <motion.p
@@ -44,9 +44,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-8 max-w-lg text-lg leading-relaxed text-muted-foreground"
             >
-              Specjalizacja: React, Next.js, TypeScript.
+              Przekształcamy pomysły w produkty cyfrowe, które napędzają biznes.
               <br />
-              Projektuję i koduję aplikacje webowe od zera do produkcji.
+              Aplikacje webowe, które zachwycają użytkowników i generują wyniki.
             </motion.p>
 
             <motion.div

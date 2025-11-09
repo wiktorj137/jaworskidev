@@ -8,27 +8,27 @@ const services = [
   {
     id: 1,
     tag: "FULL-STACK",
-    title: "Aplikacje Web",
+    title: "Aplikacje Webowe",
     shortDesc: "SaaS, panele, platformy",
-    fullDesc: "Buduję kompleksowe aplikacje od zera. Authentication, payments, real-time features, admin panels. Stack: Next.js 15, TypeScript, Prisma, tRPC.",
+    fullDesc: "Od narzędzi wewnętrznych po platformy SaaS. Budujemy aplikacje, które automatyzują procesy i otwierają nowe możliwości dla Twojej firmy.",
     metrics: ["2-3 miesiące", "95+ Lighthouse", "Serverless"],
     color: "#8b5cf6",
   },
   {
     id: 2,
     tag: "COMMERCE",
-    title: "Sklepy Online",
+    title: "Sklepy E-commerce",
     shortDesc: "Headless e-commerce",
-    fullDesc: "Nowoczesne sklepy z Shopify/Medusa. Szybkie checkout, product filters, search, wishlist. Integracje z Stripe, analytics, email marketing.",
+    fullDesc: "Więcej niż sklep. Tworzymy platformy sprzedażowe, które zapewniają wyjątkowe doświadczenia zakupowe i maksymalizują konwersję.",
     metrics: ["3-4 tygodnie", "Mobile-first", "SEO ready"],
     color: "#06b6d4",
   },
   {
     id: 3,
     tag: "MARKETING",
-    title: "Landing Pages",
+    title: "Strony Internetowe",
     shortDesc: "Conversion-focused",
-    fullDesc: "Strony lądowania zaprojektowane pod konwersję. A/B testing ready, analytics tracking, lead forms, CMS do edycji treści.",
+    fullDesc: "Twoja cyfrowa wizytówka. Projektujemy strony, które nie tylko świetnie wyglądają, ale skutecznie komunikują wartość Twojej marki i przyciągają klientów.",
     metrics: ["1-2 tygodnie", "High conversion", "Fast"],
     color: "#ec4899",
   },
@@ -38,7 +38,7 @@ export function Services() {
   const [activeService, setActiveService] = useState<number | null>(null);
 
   return (
-    <section className="relative py-32">
+    <section id="uslugi" className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         {/* Header */}
         <motion.div

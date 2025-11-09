@@ -1,197 +1,226 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Code2, Sparkles, Zap, Target } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { MessageSquare, Palette, Code2, Rocket } from "lucide-react";
 
-const skills = [
-  { name: "TypeScript", level: 95, category: "language" },
-  { name: "React/Next.js", level: 98, category: "framework" },
-  { name: "Node.js", level: 90, category: "backend" },
-  { name: "Tailwind", level: 95, category: "styling" },
-  { name: "PostgreSQL", level: 85, category: "database" },
-  { name: "Docker", level: 80, category: "devops" },
+const processSteps = [
+  {
+    id: 1,
+    icon: MessageSquare,
+    title: "Poznanie i Strategia",
+    description:
+      "Spotykamy się, aby dokładnie zrozumieć Twoją wizję i cele biznesowe. Wspólnie ustalamy, co ma robić aplikacja i dla kogo będzie stworzona.",
+    tools: ["Notion", "Miro", "Linear"],
+    output: "Plan działania",
+    color: "violet",
+    gradient: "from-violet-600 to-purple-600",
+  },
+  {
+    id: 2,
+    icon: Palette,
+    title: "Projektowanie i Makiety",
+    description:
+      "Tworzymy wizualne projekty pokazujące, jak będzie wyglądać Twoja aplikacja. Możesz zobaczyć i przetestować wygląd przed rozpoczęciem tworzenia kodu.",
+    tools: ["Figma", "FigJam", "Tailwind"],
+    output: "Projekty graficzne",
+    color: "cyan",
+    gradient: "from-cyan-600 to-blue-600",
+  },
+  {
+    id: 3,
+    icon: Code2,
+    title: "Tworzenie Aplikacji",
+    description:
+      "Zamieniamy projekty w działającą aplikację. Używamy najnowszych technologii, aby wszystko działało szybko i bezpiecznie. Możesz na bieżąco sprawdzać postępy.",
+    tools: ["Next.js", "TypeScript", "Vercel"],
+    output: "Działająca aplikacja",
+    color: "pink",
+    gradient: "from-pink-600 to-rose-600",
+  },
+  {
+    id: 4,
+    icon: Rocket,
+    title: "Publikacja i Opieka",
+    description:
+      "Uruchamiamy Twoją aplikację w internecie i dbamy o to, aby wszystko działało sprawnie. Jesteśmy dostępni, jeśli pojawią się pytania lub potrzebne będą poprawki.",
+    tools: ["Sentry", "Vercel", "GitHub"],
+    output: "Gotowy produkt",
+    color: "orange",
+    gradient: "from-orange-600 to-amber-600",
+  },
 ];
-
-const stats = [
-  { icon: Code2, value: "3+", label: "Lat doświadczenia" },
-  { icon: Sparkles, value: "20+", label: "Projektów zrealizowanych" },
-  { icon: Zap, value: "100%", label: "TypeScript w kodzie" },
-  { icon: Target, value: "<500ms", label: "Średni FCP" },
-];
-
-function SkillBar({ skill, index }: { skill: typeof skills[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group"
-    >
-      <div className="mb-2 flex items-center justify-between">
-        <span className="font-mono text-sm">{skill.name}</span>
-        <span className="font-mono text-xs text-muted-foreground">
-          {skill.level}%
-        </span>
-      </div>
-      <div className="relative h-1.5 overflow-hidden rounded-full bg-muted">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: index * 0.1 + 0.2, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-violet-600 to-pink-600"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      </div>
-    </motion.div>
-  );
-}
-
-function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
-  const Icon = stat.icon;
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl border border-border/40 bg-card p-6 transition-all duration-300 hover:border-border hover:shadow-lg"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-pink-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      
-      <div className="relative">
-        <Icon className="mb-4 h-8 w-8 text-violet-600" />
-        <div className="mb-2 text-3xl font-bold tabular-nums">
-          {stat.value}
-        </div>
-        <p className="text-sm text-muted-foreground">
-          {stat.label}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
 
 export function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  const [activeStep, setActiveStep] = useState<number | null>(null);
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const colorMap = {
+    violet: "text-violet-600",
+    cyan: "text-cyan-600",
+    pink: "text-pink-600",
+    orange: "text-orange-600",
+  };
+
+  const bgColorMap = {
+    violet: "bg-violet-500/10",
+    cyan: "bg-cyan-500/10",
+    pink: "bg-pink-500/10",
+    orange: "bg-orange-500/10",
+  };
 
   return (
-    <section ref={containerRef} className="relative py-32">
-      {/* Background decoration */}
-      <motion.div
-        style={{ y, opacity }}
-        className="absolute left-0 top-1/2 -z-10 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-violet-500/10 blur-3xl"
-      />
-
-      <div className="mx-auto max-w-7xl px-4">
+    <section id="proces" className="relative overflow-hidden py-32">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
+          transition={{ duration: 0.5 }}
+          className="mb-20 max-w-3xl"
         >
           <p className="mb-4 font-mono text-sm text-muted-foreground">
-            /// O MNIE
+            /// JAK TO ROBIMY
           </p>
-          <h2 className="mb-6 text-5xl font-bold lg:text-7xl">
-            Full-stack developer
+          <h2 className="mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl">
+            Proces → Produkt
           </h2>
+          <p className="text-lg text-muted-foreground">
+            <span className="font-bold text-violet-600">4</span> kroki od pomysłu do gotowego produktu. Kliknij, aby
+            zobaczyć szczegóły.
+          </p>
         </motion.div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left column - Bio */}
-          <div className="space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-4 text-lg text-muted-foreground"
-            >
-              <p>
-                Specjalizuję się w budowaniu{" "}
-                <span className="font-semibold text-foreground">
-                  nowoczesnych aplikacji webowych
-                </span>{" "}
-                z naciskiem na performance, UX i maintainability.
-              </p>
-              <p>
-                Pracuję głównie z{" "}
-                <span className="font-semibold text-foreground">
-                  TypeScript, React i Next.js
-                </span>
-                , ale elastycznie dobierze stack do wymagań projektu. Każda linia
-                kodu jest przemyślana - od architektury po detal animacji.
-              </p>
-              <p>
-                Wierzę, że dobry kod to nie tylko działająca funkcjonalność, ale też{" "}
-                <span className="font-semibold text-foreground">
-                  czytelność, testabilność i skalowalność
-                </span>
-                . Projekty realizuję z myślą o długoterminowej wartości dla klienta.
-              </p>
-            </motion.div>
+        {/* Interactive step cards */}
+        <div className="grid gap-6 lg:grid-cols-2">
+          {processSteps.map((step, index) => {
+            const Icon = step.icon;
+            const isActive = activeStep === step.id;
 
-            {/* Stats grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid grid-cols-2 gap-4 pt-8"
-            >
-              {stats.map((stat, index) => (
-                <StatCard key={stat.label} stat={stat} index={index} />
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right column - Skills */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h3 className="mb-8 text-2xl font-bold">Tech Stack</h3>
-              
-              <div className="space-y-6">
-                {skills.map((skill, index) => (
-                  <SkillBar key={skill.name} skill={skill} index={index} />
-                ))}
-              </div>
-
-              {/* Bottom note */}
+            return (
               <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                key={step.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="mt-12 rounded-xl border border-border/40 bg-muted/30 p-6"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                onClick={() => setActiveStep(isActive ? null : step.id)}
+                className="group cursor-pointer"
               >
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">
-                    Otwarty na nowe technologie
-                  </span>{" "}
-                  — szybko uczę się nowych frameworków i narzędzi. Jeśli projekt
-                  wymaga konkretnego stacku, nie jest to problem.
-                </p>
+                <div
+                  className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
+                    isActive
+                      ? "border-border bg-card shadow-xl"
+                      : "border-border/30 bg-card/50 hover:border-border/60"
+                  }`}
+                >
+                  {/* Card content */}
+                  <div className="p-6">
+                    {/* Icon & Title */}
+                    <div className="mb-4 flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                            bgColorMap[step.color as keyof typeof bgColorMap]
+                          }`}
+                        >
+                          <Icon
+                            className={`h-6 w-6 ${
+                              colorMap[step.color as keyof typeof colorMap]
+                            }`}
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold">{step.title}</h3>
+                          <p className="font-mono text-xs text-muted-foreground">
+                            0{step.id}/04
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Expand indicator */}
+                      <motion.div
+                        animate={{ rotate: isActive ? 45 : 0 }}
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground"
+                      >
+                        +
+                      </motion.div>
+                    </div>
+
+                    {/* Tools badges */}
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {step.tools.map((tool) => (
+                        <span
+                          key={tool}
+                          className="rounded-md bg-muted px-2.5 py-1 font-mono text-xs font-medium"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Expandable description */}
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: isActive ? "auto" : 0,
+                        opacity: isActive ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="mb-4 leading-relaxed text-muted-foreground">
+                        {step.description}
+                      </p>
+
+                      <div className="flex items-center gap-2 rounded-lg border border-border/50 bg-muted/30 px-3 py-2 text-sm">
+                        <span className="text-muted-foreground">Output:</span>
+                        <span className="font-medium">{step.output}</span>
+                      </div>
+                    </motion.div>
+
+                    {/* Gradient accent bottom */}
+                    <motion.div
+                      className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${step.gradient}`}
+                      initial={{ width: "0%" }}
+                      animate={{ width: isActive ? "100%" : "33%" }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+                </div>
               </motion.div>
-            </motion.div>
-          </div>
+            );
+          })}
         </div>
+
+        {/* Tech stack showcase */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-16 rounded-2xl border border-border/50 bg-muted/30 p-8"
+        >
+          <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h3 className="mb-2 text-lg font-bold">Stack który używamy</h3>
+              <p className="text-sm text-muted-foreground">
+                Sprawdzone narzędzia produkcyjne, zero eksperymentów
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {["Next.js 15", "React", "TypeScript", "Tailwind", "Vercel"].map(
+                (tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-lg border border-border/50 bg-background px-4 py-2 font-mono text-sm font-medium"
+                  >
+                    {tech}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
