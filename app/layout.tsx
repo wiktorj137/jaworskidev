@@ -5,6 +5,7 @@ import { siteConfig } from "../config/siteConfig";
 import { mainNav } from "../config/navigation";
 import Link from "next/link";
 import { Toaster } from "../components/ui/sonner";
+import { MobileNav } from "../components/MobileNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,20 +42,28 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>        
-        <header className="sticky top-0 z-40 w-full backdrop-blur border-b border-border/50 bg-background/80">
+        <header className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4">
-            <Link href="/" className="font-semibold tracking-tight">
-              {siteConfig.name}
+            <Link href="/" className="font-mono text-sm font-bold">
+              JaworskiDev
             </Link>
-            <ul className="flex items-center gap-6 text-sm">
+            
+            {/* Desktop nav */}
+            <ul className="hidden items-center gap-8 font-mono text-xs uppercase tracking-wider md:flex">
               {mainNav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Link 
+                    href={item.href} 
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                  >
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
+
+            {/* Mobile nav */}
+            <MobileNav />
           </nav>
         </header>
         <main className="flex-1">{children}</main>
